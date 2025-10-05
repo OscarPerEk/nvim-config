@@ -41,6 +41,45 @@ return {
 				},
 			})
 
+            -- Setup basedpyright
+            lspconfig.basedpyright.setup({
+				-- Optional: You can add specific settings for basedpyright here.
+				-- For example, to control type checking mode or enable specific diagnostics:
+				settings = {
+				  python = {
+				    analysis = {
+                        reportUnknownVariableType = "none",  -- this donst seem to work. Instead add rules in poetry toml then it works
+                        reportUnknownMemberType = "none",
+				    },
+				  },
+				},
+			})
+
+
+            --- Add the ruff.setup configuration here ---
+            lspconfig.ruff.setup({
+                -- This is the crucial part for Ruff LSP
+                -- Ensure you have `ruff` installed via `:MasonInstall ruff`
+                init_options = {
+                    settings = {
+                        format = {
+                            enable = true,
+                        },
+                        lint = {
+                            enable = true,
+                        },
+                        -- You can also add lineLength here if you want it applied consistently
+                        -- lineLength = 88,
+                    },
+                },
+                -- It's good practice to pass capabilities to all LSP setups
+                capabilities = capabilities,
+                -- If you have a shared on_attach function for common keymaps/autocommands, you can add it here:
+                -- on_attach = function(client, bufnr)
+                --     -- common keymaps or logic for all LSPs
+                -- end,
+            })
+
 			-- Keybindings for LSP actions
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
@@ -57,14 +96,14 @@ return {
 			-- Information and diagnostics
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
 			vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
+			vim.keymap.set("n", "<leader>ds", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 
 			-- Editing and refactoring
 			-- vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 			-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-			-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Buffer" })
+			vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "Format Buffer" })
 		end,
 	},
 }

@@ -44,3 +44,32 @@ vim.keymap.set("i", "<C-a>", "ä")
 vim.keymap.set("i", "<C-U><C-U>", "Ü")
 vim.keymap.set("i", "<C-O><C-O>", "Ö")
 vim.keymap.set("i", "<C-A><C-A>", "Ä")
+
+-- -- Insert a Go-style error check when pressing <leader>,
+-- -- in insert mode. It pastes:
+-- -- if err != nil {
+-- --     return nil, err
+-- -- }
+-- vim.keymap.set("n", "<leader>,", function()
+--   -- You can adjust the indentation/return values if needed.
+--   local snippet = "if err != nil {\n\treturn nil, err\n}"
+--   -- Insert the snippet at cursor
+--   vim.api.nvim_put(vim.split(snippet, "\n"), "c", true, true)
+--   -- Move cursor inside the block after the newline (optional tweak)
+--   vim.cmd("normal! 2k$") -- place cursor at end of first line; adjust as desired
+-- end, { noremap = true, silent = true })
+
+
+-- ensure leader is set if not already
+vim.g.mapleader = vim.g.mapleader or " "
+
+vim.keymap.set("n", "<leader>,", function()
+  -- Snippet to insert
+  local snippet = "if err != nil {\n\treturn nil, err\n}"
+  -- Insert at cursor (respecting current indent)
+  vim.api.nvim_put(vim.split(snippet, "\n"), "c", true, true)
+  -- Exit insert mode
+  -- Then trigger <leader>f f in normal mode
+  local seq = vim.api.nvim_replace_termcodes("<Esc>" .. vim.g.mapleader .. "f" .. "f", true, false, true)
+  vim.api.nvim_feedkeys(seq, "n", false)
+end, { noremap = true, silent = true })
