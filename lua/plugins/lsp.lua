@@ -100,10 +100,24 @@ return {
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 
+
+            -- Toggle diagnostics globally
+            vim.keymap.set("n", "<leader>dt", function()
+              local disabled = vim.diagnostic.is_disabled()
+              if disabled then
+                vim.diagnostic.enable()
+                print("Diagnostics enabled")
+              else
+                vim.diagnostic.disable()
+                print("Diagnostics disabled")
+              end
+            end, { desc = "Toggle Diagnostics" })
+
+
 			-- Editing and refactoring
 			-- vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 			-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-			vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "Format Buffer" })
+			-- vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "Format Buffer" }) i think this worked. instead trying via filter.lua
 		end,
 	},
 }
