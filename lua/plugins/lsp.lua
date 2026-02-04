@@ -28,6 +28,9 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 
+			-- Setup yamlls
+			lspconfig.yamlls.setup({})
+
 			-- Setup gopls
 			lspconfig.gopls.setup({
 				cmd = { "gopls" },

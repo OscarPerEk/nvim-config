@@ -19,32 +19,12 @@
 --
 return {
 	"zbirenbaum/copilot.lua",
-	dependencies = { "zbirenbaum/copilot-cmp" }, -- Ensure copilot-cmp is installed
+	dependencies = { "zbirenbaum/copilot-cmp" },
 	config = function()
-		-- Set up copilot.lua with suggestions enabled
 		require("copilot").setup({
-			suggestion = { enabled = false }, -- Disable inline suggestions (handled by cmp)
-			panel = { enabled = false }, -- Disable Copilot panel
+			suggestion = { enabled = false },
+			panel = { enabled = false },
 		})
-
-		-- Enable Copilot
-		vim.api.nvim_set_keymap("n", "<leader>ai", ":Copilot enable<CR>", { noremap = true, silent = true })
-
-		-- Disable Copilot
-		vim.api.nvim_set_keymap("n", "<leader>ao", ":Copilot disable<CR>", { noremap = true, silent = true })
-
-		-- Set up Copilot for nvim-cmp
-		require("copilot_cmp").setup() -- This connects Copilot to cmp
-
-		-- Configure nvim-cmp
-		local cmp = require("cmp")
-
-		cmp.setup({
-			sources = {
-				{ name = "copilot", group_index = 2 }, -- Ensure Copilot has higher priority
-				{ name = "nvim_lsp" },
-				{ name = "buffer" },
-			},
-		})
+		require("copilot_cmp").setup()
 	end,
 }

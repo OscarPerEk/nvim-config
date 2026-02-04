@@ -12,10 +12,18 @@ return {
 		local cmp = require("cmp")
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
+				-- Trigger completion menu
 				["<C-2>"] = cmp.mapping.complete(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+				-- Navigate suggestions
+				["<C-n>"] = cmp.mapping.select_next_item(),     -- Next suggestion
+				["<C-p>"] = cmp.mapping.select_prev_item(),     -- Previous suggestion
+
+				-- Accept suggestion
+				["<C-CR>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
+				{ name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },
 				{ name = "path" },
