@@ -53,6 +53,8 @@ return {
 				    analysis = {
                         reportUnknownVariableType = "none",  -- this donst seem to work. Instead add rules in poetry toml then it works
                         reportUnknownMemberType = "none",
+                        reportUnknownParameterType = "none",
+                        reportMissingTypeArgument = "none",
 				    },
 				  },
 				},
