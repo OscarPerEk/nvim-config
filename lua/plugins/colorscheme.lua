@@ -40,12 +40,26 @@
 -- dark
 return {
 	{
-		"rebelot/kanagawa.nvim",
+		"navarasu/onedark.nvim",
+		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd("colorscheme kanagawa-wave") -- Use "kanagawa-wave" or "kanagawa-dragon" if preferred
-		end,
+			require('onedark').setup {
+				style = 'deep'
+			}
+			require('onedark').load()
+		end
 	},
 }
+
+-- previous this is an awesome dark theme
+-- return {
+-- 	{
+-- 		"rebelot/kanagawa.nvim",
+-- 		config = function()
+-- 			vim.cmd("colorscheme kanagawa-wave") -- Use "kanagawa-wave" or "kanagawa-dragon" if preferred
+-- 		end,
+-- 	},
+-- }
 
 -- return {
 -- 	{
