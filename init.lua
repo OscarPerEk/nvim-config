@@ -36,6 +36,13 @@ vim.keymap.set("n", "<leader>c", '"+y', { desc = "Yank to Clipboard" })
 vim.keymap.set("v", "<leader>c", '"+y', { desc = "Yank to Clipboard (Visual)" })
 vim.keymap.set("n", "<leader>v", '"+p', { desc = "Paste from Clipboard" })
 vim.keymap.set("v", "<leader>v", '"+p', { desc = "Paste from Clipboard" })
+vim.keymap.set("n", "<leader>cp", function()
+	local path = vim.fn.expand("%:.")
+	local line = vim.fn.line(".")
+	local result = path .. ":" .. line
+	vim.fn.setreg("+", result)
+	vim.notify(result, vim.log.levels.INFO)
+end, { desc = "Copy file path:line to clipboard" })
 
 -- German keys
 vim.keymap.set("i", "<C-u>", "ü")
