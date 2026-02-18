@@ -24,6 +24,9 @@ return {
 			vim.keymap.set("n", "<leader>fl", builtin.resume, { desc = "Telescope resume" })
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Telescope resume" })
 			vim.keymap.set("n", "<leader>fh", builtin.buffers, { desc = "Telescope buffers" })
+			vim.keymap.set("n", "<leader>fs", function()
+				builtin.lsp_document_symbols({ symbol_width = 45 })
+			end, { desc = "Search Document Symbols" })
 
 			-- Grep word under cursor
 			vim.keymap.set("n", "<leader>w", function()
